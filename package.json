@@ -1,0 +1,42 @@
+{
+  "name": "anpheon-build",
+  "version": "1.9.9",
+  "author": {
+    "name": "Raf HiekHev",
+    "email": "anpheon.org@gmail.com"
+  },
+  "contributors": [],
+  "homepage": "http://anpheon.org",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "jade": "*",
+    "koa": "*",
+    "koa-static": "*",
+    "metalsmith": "*",
+    "metalsmith-beautify": "*",
+    "metalsmith-collections": "*",
+    "metalsmith-feed": "0.0.6",
+    "metalsmith-layouts": "^1.4.1",
+    "metalsmith-markdown": "*",
+    "metalsmith-permalinks": "*",
+    "moment": "*"
+  },
+  "description": "The build files for anpheon.org, Sorce Theory website.",
+  "_npmVersion": "2.7.4",
+  "_nodeVersion": "5.7.1",
+  "maintainers": [
+    {
+      "name": "joel.david.morrison",
+      "email": "spinbitz@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/anpheon-build/-/anpheon-build-1.4.0.tgz",
+  "devDependencies": {
+    "metalsmith-metadata": "0.0.4",
+    "metalsmith-sass": "^1.3.0",
+    "node-sass": "^3.4.2"
+  }
+}

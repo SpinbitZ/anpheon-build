@@ -1,2 +1,4 @@
-# anpheon-build
-The build files for anpheon.org, Sorce Theory website.
+# A N P H E O N . org
+###Sorce Theory website
+
+anpheon-build is the build files for anpheon.org.

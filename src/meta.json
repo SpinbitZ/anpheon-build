@@ -1,0 +1,91 @@
+{
+  "id": "anpheon",
+  "name": "Anpheon",
+  "domain": "anpheon.org",
+  "version": "0.0.23-4",
+  "title": "ANPHEON",
+  "title_alt": "A N P H E O N",
+  "tagline": "The Anatomy, Physiology, Histology, and Embryology of Nature",
+  "url": "http://anpheon.org",
+  "author": "Raf HiekHev",
+  "license": "Creative Commons with common-sense courtesy attribution to all authors and contributors listed, cited, or otherwise used.",
+  "created": "2002-12-06T07:00:04",
+  "modified": "2016-02-29T11:44:20",
+  "menus": {
+    "top": {
+      "home": {
+        "path": ""
+      },
+      "posts": {
+        "path": ""
+      },
+      "articles": {
+        "path": ""
+      },
+      "books": {
+        "path": ""
+      },
+      "about": {
+        "path": ""
+      },
+      "contact": {
+        "path": ""
+      }
+    }
+  },
+  "tags": [
+    "alt-physics",
+    "heretical",
+    "fluid dynamic",
+    "physics",
+    "Gerald Lebau",
+    "aether",
+    "anti-relativity",
+    "heterodox",
+    "superfluid",
+    "fractal",
+    "self-similar",
+    "chaos",
+    "complexity",
+    "science",
+    "scientism",
+    "plasma cosmology",
+    "electric universe",
+    "fractal cosmology"
+  ],
+  "authors": {
+    "GIL": {
+      "name": "Gerald I. Lebau",
+      "nick": "Jerry",
+      "URL": "http://jerry.com"
+    },
+    "JDM": {
+      "name": "Joel D. Morrison",
+      "nick": "Joel",
+      "URL": "http://spinbitz.net"
+    },
+    "JC": {
+      "name": "Juan Calsiano",
+      "nick": "Juan",
+      "URL": "http://aethernitatus.net"
+    }
+  },
+  "authors_list": [
+    "Gerald Lebau",
+    "Juan Calsiano",
+    "Joel Morrison",
+    "Neil Creamer",
+    "Ilya Prigogine",
+    "Stephen Rado",
+    "Deleuze",
+    "Spinoza",
+    "et. al"
+  ],
+  "contributors": [
+    "Juan Calsiano",
+    "Joel Morrison",
+    "Neil Creamer"
+  ],
+  "blurb_sm": "",
+  "time_stamp_fmt": "YYYY-MM-DDThh:mm:ss"
+}

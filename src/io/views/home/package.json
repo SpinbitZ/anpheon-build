@@ -1,0 +1,14 @@
+{
+  "name": "home",
+  "version": "0.0.1",
+  "main": "home.js",
+  "private": true,
+  "plugin": {
+    "consumes": [
+      "base"
+    ],
+    "provides": [
+      "home"
+    ]
+  }
+}

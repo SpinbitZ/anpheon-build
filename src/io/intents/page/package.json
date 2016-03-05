@@ -1,0 +1,14 @@
+{
+  "name": "page",
+  "version": "0.0.1",
+  "main": "page.js",
+  "private": true,
+  "plugin": {
+    "consumes": [
+      "base"
+    ],
+    "provides": [
+      "page"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+h4 ARTICLES
+ul
+    each article in collections.articles
+        li= moment(article.date).format('YYYY-MM-DD') + " - "
+        a(href= '/' + article.path + '/')= article.title
+
+h4 BOOKS
+ul
+    each book in collections.books
+        li= moment(book.date).format('YYYY-MM-DD') + " - "
+        a(href= '/' + book.path + '/')= book.title
+        <p>#{book.author}</p>
+
+h4 NEWS
+ul
+    each item in collections.news
+        li= moment(item.date).format('YYYY-MM-DD') + " - "
+        a(href= '/' + item.path + '/')= item.title

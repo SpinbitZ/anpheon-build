@@ -1,0 +1,12 @@
+extends layout
+block main
+  #news
+    h1 news
+    if collections.news && collections.news.length > 0
+      each item in collections.news
+        h2
+          a(href='/' + item.path)!= item.title
+        div!= item.excerpt
+    else
+      h2= collections.news.length
+      h2 there ain't no news here, man

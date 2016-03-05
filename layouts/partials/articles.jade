@@ -1,0 +1,5 @@
+each article in collections.articles
+    h3
+        a(href="/" + article.path + "/")= article.title
+    p(style='color: #666;')= moment(article.date).format('MMMM Do YYYY')
+    div!= article.contents
