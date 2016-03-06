@@ -31,18 +31,61 @@ del = require('del'),
 filter = require('gulp-filter');
 
 
-gulp.task('filter', () => {
-    // create filter instance inside task function
-    const f = filter(['*', '!src/vendor']);
+//gulp.task('filter', () => {
+//    // create filter instance inside task function
+//    const f = filter(['*', '!src/vendor']);
+//
+//    return gulp.src('src/*.js')
+//        // filter a subset of the files
+//        .pipe(f)
+//        // run them through a plugin
+//        .pipe(uglify())
+//        .pipe(gulp.dest('dist'));
+//});
 
-    return gulp.src('src/*.js')
-        // filter a subset of the files
-        .pipe(f)
-        // run them through a plugin
-        .pipe(uglify())
-        .pipe(gulp.dest('dist'));
+
+////////////////////////////////////////////////////////////////////////////////
+
+// Watch Tasks for livereload
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+gulp.task('watch', function () {
+    return gulp
+        // Watch the __sass folder for change,
+        // and run `sass` task when something happens
+        .watch(__.sass_src, ['sass'])
+        // When there is a change,
+        // log a message in the console
+        .on('change', function (event) {
+            console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+        });
 });
 
+//
+//gulp.task('watch', function () {
+//    gulp.watch(['./src/**/*.html'], ['html']);
+//    gulp.watch(['./src/**/*.js'], ['js']);
+//    gulp.watch(['./src/**/*.scss'], ['css']);
+//});
+//
+//gulp.task('html', ['templates'], function () {
+//    gulp.src('./dist/html/*.html')
+//        .pipe(connect.reload());
+//});
+//
+//gulp.task('js', function () {
+//    gulp.src('./src/**/*.js')
+//        .pipe(connect.reload());
+//});
+//
+//gulp.task('css', ['sass'], function () {
+//    gulp.src('./dist/css')
+//        .pipe(connect.reload());
+//});
+
+////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -176,17 +219,6 @@ gulp.task('sassdoc', function () {
 });
 
 
-gulp.task('watch', function () {
-    return gulp
-        // Watch the __sass folder for change,
-        // and run `sass` task when something happens
-        .watch(__.sass_src, ['sass'])
-        // When there is a change,
-        // log a message in the console
-        .on('change', function (event) {
-            console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-        });
-});
 
 
 gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]);
