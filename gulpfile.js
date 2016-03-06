@@ -28,7 +28,8 @@ autoprefixer = require('gulp-autoprefixer'),
 sassdoc = require('gulp-sassdoc'),
 metalsmith = require('gulp-metalsmith'),
 del = require('del'),
-filter = require('gulp-filter');
+filter = require('gulp-filter'),
+exec = require('child_process').exec;
 
 
 //gulp.task('filter', () => {
@@ -88,8 +89,6 @@ gulp.task('watch', function () {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-
-
 gulp.task('markup', function () {
     const
 
@@ -100,15 +99,22 @@ gulp.task('markup', function () {
     beautify = require('metalsmith-beautify'),
     feed = require('metalsmith-feed'),
     moment = require('moment'),
-    metadata = require('metalsmith-metadata');
+    metadata = require('metalsmith-metadata'),
+    gulpIgnore = require('gulp-ignore');
     console.log('... building markup ...');
 
+    var condition = './content/*';
+
+    // TODO : could just source content here
     return gulp.src(__.build_src + '/**')
         .pipe(metalsmith({
             // set Metalsmith's root directory, for example for locating templates, defaults to CWD
             root: __dirname,
             // files to exclude from the build
-            ignore: [__.build_src + '/*.tmp'],
+            ignore: [
+                __.build_src + '/*.tmp',
+                'io/*'
+            ],
             // read frontmatter, defaults to true
             frontmatter: true,
             // Metalsmith plugins to use
@@ -117,6 +123,7 @@ gulp.task('markup', function () {
                     site: 'meta.json',
                     settings: 'settings.json'
                 }),
+                //gulpIgnore.include(condition),
                 markdown(),
                 collections({
                     articles: {
@@ -167,10 +174,20 @@ gulp.task('sass', function () {
 
 gulp.task('clean:build', function () {
     return del([
-        __.build + __.pub + '/**/*'
+        __.pub + '/**/*'
     ]);
 });
 
+gulp.task('buildjs', function () {
+    exec('npm run buildjs', function (err, stdout, stderr) {
+        if (err) {
+            throw err;
+        }
+        else {
+            console.log('buildjs complete');
+        }
+    });
+});
 
 //var serve = require('gulp-serve');
 //
@@ -219,11 +236,9 @@ gulp.task('sassdoc', function () {
 });
 
 
-
-
 gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]);
 
-gulp.task('dev', ['markup', 'sass', 'watch' /*, possible other tasks... */]);
+gulp.task('dev', ['clean:build', 'markup', 'sass', 'buildjs', 'watch' /*, possible other tasks... */]);
 
 
 gulp.task('prod', ['sassdoc'], function () {

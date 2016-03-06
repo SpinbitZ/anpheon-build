@@ -1,7 +1,12 @@
 head
-  title #{site.title} | #{title}
-  meta(name='viewport' content='width=device-width initial-scale=1')
-  link(rel='stylesheet' href='#{settings.theme}app.css')
-  //link(rel="stylesheet" href='#{settings.theme}zenburn.css')
-  script(src='/io/core.js')
-  //script hljs.initHighlightingOnLoad();
+    title #{site.title} | #{title}
+    meta(name='viewport' content='width=device-width initial-scale=1')
+    link(rel='stylesheet' href='#{settings.theme}')
+    //link(rel="stylesheet" href='#{settings.theme}zenburn.css')
+    //script(src=settings.script_entry)
+    //script hljs.initHighlightingOnLoad();
+script(src='jspm_packages/system.js')
+    script(src='config.js')
+    script.
+        System.import('#{settings.script_entry}');
+
