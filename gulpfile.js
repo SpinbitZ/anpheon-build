@@ -25,12 +25,31 @@ gulp = require('gulp'),
 sass = require('gulp-sass'),
 sourcemaps = require('gulp-sourcemaps'),
 autoprefixer = require('gulp-autoprefixer'),
-sassdoc = require('gulp-sassdoc');
+sassdoc = require('gulp-sassdoc'),
+metalsmith = require('gulp-metalsmith'),
+del = require('del'),
+filter = require('gulp-filter');
+
+
+gulp.task('filter', () => {
+    // create filter instance inside task function
+    const f = filter(['*', '!src/vendor']);
+
+    return gulp.src('src/*.js')
+        // filter a subset of the files
+        .pipe(f)
+        // run them through a plugin
+        .pipe(uglify())
+        .pipe(gulp.dest('dist'));
+});
+
+
+
 
 
 gulp.task('markup', function () {
     const
-    metalsmith = require('gulp-metalsmith'),
+
     markdown = require('metalsmith-markdown'),
     layouts = require('metalsmith-layouts'),
     collections = require('metalsmith-collections'),
@@ -41,7 +60,7 @@ gulp.task('markup', function () {
     metadata = require('metalsmith-metadata');
     console.log('... building markup ...');
 
-    return gulp.src(__.build_src+'/**')
+    return gulp.src(__.build_src + '/**')
         .pipe(metalsmith({
             // set Metalsmith's root directory, for example for locating templates, defaults to CWD
             root: __dirname,
@@ -102,23 +121,51 @@ gulp.task('sass', function () {
         .resume();
 });
 
-var http = require('http');
-var ecstatic = require('ecstatic');
 
-gulp.task('serve', function(){
-    http.createServer(
-        ecstatic({ root: __dirname + __.pub })
-    ).listen(8080);
-
-    console.log('Listening on :8080');
-    gulp.watch('**/*.js', function(){
-        console.log("watching...");
-        //gulp.run('your awesome task');
-    });
+gulp.task('clean:build', function () {
+    return del([
+        __.build + __.pub + '/**/*'
+    ]);
 });
 
 
+//var serve = require('gulp-serve');
+//
+//gulp.task('serve', serve('public'));
+//gulp.task('serve-build', serve(['public', 'build']));
+//gulp.task('serve-prod', serve({
+//    root: ['public', 'build'],
+//    port: 80,
+//    middleware: function(req, res) {
+//        // custom optional middleware
+//    }
+//}));
 
+
+gulp.task('serve', function () {
+    const
+    lensmith = require('./lensmith');
+    console.log("serve is ... ", lensmith);
+    console.log('... serving markup ...');
+
+    return gulp.src(__.build_src + '/**')
+        .pipe(metalsmith({
+            // set Metalsmith's root directory, for example for locating templates, defaults to CWD
+            root: __dirname,
+            frontmatter: true,
+            // Metalsmith plugins to use
+            use: [
+                lensmith({
+                    //site: 'meta.json',
+                    //settings: 'settings.json'
+                })
+            ],
+            // Initial Metalsmith metadata:
+            metadata: {
+                site_title: 'Sample static site'
+            }
+        }));
+});
 
 
 gulp.task('sassdoc', function () {
@@ -143,6 +190,8 @@ gulp.task('watch', function () {
 
 
 gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]);
+
+gulp.task('dev', ['markup', 'sass', 'watch' /*, possible other tasks... */]);
 
 
 gulp.task('prod', ['sassdoc'], function () {

@@ -4,8 +4,25 @@ const opt = {
     pub: '/__pub'
 };
 
-const metal = require('./metal')(opt);
 
-metal.build();
-metal.serve();
+const server = require('./serve')(opt);
+//
+//server.build();
+server.serve();
 
+//function server() {
+//    "use strict";
+//
+//
+//
+//    var app = koa();
+//
+//    app.use(server(__dirname + "__pub"));
+//
+//    app.listen('3000');
+//
+//    console.log('Server is listening at http://localhost:3000/');
+//
+//}
+//
+//server();
