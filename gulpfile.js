@@ -6,7 +6,7 @@ opt = {
 __ = {
     build: __dirname,
     build_src: 'src',
-    pub: '.__pub',
+    pub: './__pub',
     sass_src: './theme/smas/**/*.scss',
     css_dest: './__pub/theme',
     js_src: '',
