@@ -1,34 +1,25 @@
-module.exports = function (opt) {
-
-    var
-    dir = opt.dir || __dirname,
-    pub = opt.pub || '__pub',
-    koa = require('koa'),
-    serve = require('koa-static');
-
-    return {
-        serve: runServer
-    };
-
-
-    function runServer() {
-        "use strict";
-
-
-        var app = koa();
-
-        app.use(serve(__dirname + pub));
-
-        app.listen('3000');
-
-        console.log(opt.title + ':: Server is listening at http://localhost:3000/');
-
-    }
-
-
+var opt = {
+    title: "'A N P H E O N.org'",
+    dir: __dirname,
+    pub: './__pub',
+    port: '3000'
 };
 
+var
 
+koa = require('koa'),
+serve = require('koa-static');
 
+//var server = require('./koa_serve_module')(opt);
 
+var app = koa();
 
+var path = __dirname + '/__pub';
+
+console.log("koa server is attempting to serve pages from ... "+path);
+
+app.use(serve(path));
+
+app.listen('3000');
+
+console.log(opt.title + '... is listening at http://localhost:3000/');

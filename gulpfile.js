@@ -6,7 +6,7 @@ opt = {
 __ = {
     build: __dirname,
     build_src: 'src',
-    pub: '__pub',
+    pub: '.__pub',
     sass_src: './theme/smas/**/*.scss',
     css_dest: './__pub/theme',
     js_src: '',
@@ -65,7 +65,7 @@ date = require('metalsmith-build-date');
 ////////////////////////////////////////////////////////////////////////////////
 
 
-gulp.task('watch', function () {
+gulp.task('sass:watch', function () {
     return gulp
         // Watch the __sass folder for change,
         // and run `sass` task when something happens
@@ -77,7 +77,6 @@ gulp.task('watch', function () {
         });
 });
 
-//
 //gulp.task('watch', function () {
 //    gulp.watch(['./src/**/*.html'], ['html']);
 //    gulp.watch(['./src/**/*.js'], ['js']);
@@ -160,7 +159,7 @@ gulp.task('f', function () {
 });
 
 
-gulp.task('markup', function () {
+gulp.task('content', function () {
     console.log('... building markup ...');
 
     const f = filter(['!src/io', {restore: true}]);
@@ -246,14 +245,8 @@ gulp.task('sass', function () {
 });
 
 
-gulp.task('clean:build', function () {
-    return del([
-        __.pub + '/**/*'
-    ]);
-});
-
-gulp.task('buildjs', function () {
-    exec('npm run buildjs', function (err, stdout, stderr) {
+gulp.task('js', function () {
+    exec('npm run js', function (err, stdout, stderr) {
         if (err) {
             throw err;
         }
@@ -275,32 +268,49 @@ gulp.task('buildjs', function () {
 //    }
 //}));
 
+gulp.task('gulp monitor', function () {
+    //var a = gulp.src('./_site/**/*.html')
+    //    .pipe(frep(patterns))
+    //    .pipe(spellcheck(({replacement: '<<<%s (suggestions: %s)>>>'})))
+    //    .pipe(frep(nonSuggestions))
+    //    ;
+    //
+    //a.on('data', function(chunk) {
+    //    var contents = chunk.contents.toString().trim();
+    //    var bufLength = process.stdout.columns;
+    //    var hr = '\n\n' + Array(bufLength).join("_") + '\n\n'
+    //    if (contents.length > 1) {
+    //        process.stdout.write(chunk.path + '\n' + contents + '\n');
+    //        process.stdout.write(chunk.path + hr);
+    //    }
+    //});
 
-gulp.task('serve', function () {
-    const
-    lensmith = require('./lensmith');
-    console.log("serve is ... ", lensmith);
-    console.log('... serving markup ...');
 
-    return gulp.src(__.build_src + '/**')
-        .pipe(metalsmith({
-            // set Metalsmith's root directory, for example for locating templates, defaults to CWD
-            root: __dirname,
-            frontmatter: true,
-            // Metalsmith plugins to use
-            use: [
-                lensmith({
-                    //site: 'meta.json',
-                    //settings: 'settings.json'
-                })
-            ],
-            // Initial Metalsmith metadata:
-            metadata: {
-                site_title: 'Sample static site'
-            }
-        }));
+
+
+
+
 });
 
+
+gulp.task('serve', function () {
+    var util  = require('util'),
+    spawn = require('child_process').spawn,
+    ls    = spawn('npm', ['run', 'serve']);
+
+    ls.stdout.on('data', function (data) {
+        console.log('stdout: ' + data);
+    });
+
+    ls.stderr.on('data', function (data) {
+        console.log('stderr: ' + data);
+    });
+
+    ls.on('exit', function (code) {
+        console.log('child process exited with code ' + code);
+    });
+
+});
 
 gulp.task('sassdoc', function () {
     return gulp
@@ -310,9 +320,16 @@ gulp.task('sassdoc', function () {
 });
 
 
+gulp.task('clean:build', function () {
+    return del([
+        __.pub + '/**/*'
+    ]);
+});
+
+
 gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]);
 
-gulp.task('dev', ['clean:build', 'markup', 'sass', 'buildjs', 'watch' /*, possible other tasks... */]);
+gulp.task('dev', ['clean:build', 'content', 'sass', 'js', 'sass:watch' ,'serve']);
 
 
 gulp.task('prod', ['sassdoc'], function () {

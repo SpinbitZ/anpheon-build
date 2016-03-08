@@ -8,17 +8,8 @@
   "contributors": [],
   "homepage": "http://anpheon.org",
   "scripts": {
-    "build": "gulp build",
-    "dev": "gulp dev",
-    "serve": "node serve",
-    "js": "jspm bundle-sfx io/core __pub/core.min.js --minify --skip-source-maps",
-    "sass": "gulp sass",
-    "content": "gulp content",
-    "js:watch": "gulp js:watch",
-    "sass:watch": "gulp sass:watch",
-    "content:watch": "gulp content:watch",
-    "clean": "gulp clean:build",
-    "test": "test"
+    "start": "node index.js",
+    "buildjs": "jspm bundle-sfx io/core __pub/core.min.js --minify --skip-source-maps"
   },
   "dependencies": {
     "jade": "*",
