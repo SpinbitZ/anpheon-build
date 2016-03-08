@@ -5,8 +5,7 @@ head
     //link(rel="stylesheet" href='#{settings.theme}zenburn.css')
     //script(src=settings.script_entry)
     //script hljs.initHighlightingOnLoad();
-script(src='jspm_packages/system.js')
-    script(src='config.js')
-    script.
-        System.import('#{settings.script_entry}');
-
+script(src='../jspm_packages/system.js')
+script(src='../jspm_config.js')
+script.
+    System.import('./core.min.js');

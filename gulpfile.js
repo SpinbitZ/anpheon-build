@@ -1,48 +1,48 @@
 const
 
-opt = {
-    title: "'A N P H E O N.org'"
-},
-__ = {
-    build: __dirname,
-    build_src: 'src',
-    pub: './__pub',
-    sass_src: './theme/smas/**/*.scss',
-    css_dest: './__pub/theme',
-    js_src: '',
-    js_dest: '',
-    sassdoc_dest: './theme/sassdoc'
-},
-sassOptions = {
-    errLogToConsole: true,
-    outputStyle: 'expanded'
-},
-autoprefixerOptions = {
-    browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
-},
+    opt = {
+        title: "'A N P H E O N.org'"
+    },
+    __ = {
+        build: __dirname,
+        build_src: 'src',
+        pub: './__pub',
+        sass_src: './theme/smas/**/*.scss',
+        css_dest: './__pub/theme',
+        js_src: '',
+        js_dest: '/io',
+        sassdoc_dest: './theme/sassdoc'
+    },
+    sassOptions = {
+        errLogToConsole: true,
+        outputStyle: 'expanded'
+    },
+    autoprefixerOptions = {
+        browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+    },
 
-gulp = require('gulp'),
-sass = require('gulp-sass'),
-sourcemaps = require('gulp-sourcemaps'),
-autoprefixer = require('gulp-autoprefixer'),
-sassdoc = require('gulp-sassdoc'),
-metalsmith = require('gulp-metalsmith'),
-del = require('del'),
-filter = require('gulp-filter'),
-exec = require('child_process').exec,
+    gulp = require('gulp'),
+    sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
+    autoprefixer = require('gulp-autoprefixer'),
+    sassdoc = require('gulp-sassdoc'),
+    metalsmith = require('gulp-metalsmith'),
+    del = require('del'),
+    filter = require('gulp-filter'),
+    exec = require('child_process').exec,
 
 //// metalsmith
-markdown = require('metalsmith-markdown'),
-layouts = require('metalsmith-layouts'),
-collections = require('metalsmith-collections'),
-permalinks = require('metalsmith-permalinks'),
-beautify = require('metalsmith-beautify'),
-feed = require('metalsmith-feed'),
-moment = require('moment'),
-metadata = require('metalsmith-metadata'),
-gulpIgnore = require('gulp-ignore'),
-lens = require('./lensmith'),
-date = require('metalsmith-build-date');
+    markdown = require('metalsmith-markdown'),
+    layouts = require('metalsmith-layouts'),
+    collections = require('metalsmith-collections'),
+    permalinks = require('metalsmith-permalinks'),
+    beautify = require('metalsmith-beautify'),
+    feed = require('metalsmith-feed'),
+    moment = require('moment'),
+    metadata = require('metalsmith-metadata'),
+    gulpIgnore = require('gulp-ignore'),
+    lens = require('./lensmith'),
+    date = require('metalsmith-build-date');
 
 
 //gulp.task('filter', () => {
@@ -67,8 +67,8 @@ date = require('metalsmith-build-date');
 
 gulp.task('sass:watch', function () {
     return gulp
-        // Watch the __sass folder for change,
-        // and run `sass` task when something happens
+    // Watch the __sass folder for change,
+    // and run `sass` task when something happens
         .watch(__.sass_src, ['sass'])
         // When there is a change,
         // log a message in the console
@@ -160,31 +160,16 @@ gulp.task('f', function () {
 
 
 gulp.task('content', function () {
-    console.log('... building markup ...');
-
-    const f = filter(['!src/io', {restore: true}]);
-
-    const jsFilter = filter('**/*.js', {restore: true});
-    const lessFilter = filter('**/*.less', {restore: true});
-
-    //return gulp.src('src/*.js')
-    // filter a subset of the files
-    //.pipe(f)
-    // run them through a plugin
-    //.pipe(uglify())
-    //.pipe(gulp.dest('dist'));
-    //var condition = './content/*';
+    console.log('... building content ...');
 
     // TODO : could just source content here
-    return gulp.src(__.build_src + '/**')
+    return gulp.src(['./src/**', '!./src/io/**'])
         //.pipe(f)
         .pipe(metalsmith({
             // set Metalsmith's root directory, for example for locating templates, defaults to CWD
             root: __dirname,
             // files to exclude from the build
             ignore: [
-                __.build_src + '/*.tmp',
-                'io/*'
             ],
             // read frontmatter, defaults to true
             frontmatter: true,
@@ -195,7 +180,7 @@ gulp.task('content', function () {
                     site: 'meta.json',
                     settings: 'settings.json'
                 }),
-                date({ key: 'dateBuilt' }),
+                date({key: 'dateBuilt'}),
                 //gulpIgnore.include(condition),
                 markdown(),
                 collections({
@@ -245,13 +230,19 @@ gulp.task('sass', function () {
 });
 
 
+gulp.task('clean:js', function () {
+    return del([
+        __.pub + __.js_dest + '/io/**'
+    ]);
+});
+
 gulp.task('js', function () {
     exec('npm run js', function (err, stdout, stderr) {
         if (err) {
             throw err;
         }
         else {
-            console.log('buildjs complete');
+            console.log('js complete');
         }
     });
 });
@@ -286,17 +277,13 @@ gulp.task('gulp monitor', function () {
     //});
 
 
-
-
-
-
 });
 
 
 gulp.task('serve', function () {
-    var util  = require('util'),
-    spawn = require('child_process').spawn,
-    ls    = spawn('npm', ['run', 'serve']);
+    var util = require('util'),
+        spawn = require('child_process').spawn,
+        ls = spawn('npm', ['run', 'serve']);
 
     ls.stdout.on('data', function (data) {
         console.log('stdout: ' + data);
@@ -329,7 +316,9 @@ gulp.task('clean:build', function () {
 
 gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]);
 
-gulp.task('dev', ['clean:build', 'content', 'sass', 'js', 'sass:watch' ,'serve']);
+gulp.task('build', ['content', 'sass', 'js']);
+
+gulp.task('dev', ['build', 'sass:watch', 'serve']);
 
 
 gulp.task('prod', ['sassdoc'], function () {
