@@ -29,7 +29,20 @@ sassdoc = require('gulp-sassdoc'),
 metalsmith = require('gulp-metalsmith'),
 del = require('del'),
 filter = require('gulp-filter'),
-exec = require('child_process').exec;
+exec = require('child_process').exec,
+
+//// metalsmith
+markdown = require('metalsmith-markdown'),
+layouts = require('metalsmith-layouts'),
+collections = require('metalsmith-collections'),
+permalinks = require('metalsmith-permalinks'),
+beautify = require('metalsmith-beautify'),
+feed = require('metalsmith-feed'),
+moment = require('moment'),
+metadata = require('metalsmith-metadata'),
+gulpIgnore = require('gulp-ignore'),
+lens = require('./lensmith'),
+date = require('metalsmith-build-date');
 
 
 //gulp.task('filter', () => {
@@ -88,25 +101,11 @@ gulp.task('watch', function () {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-
-gulp.task('markup', function () {
-    const
-
-    markdown = require('metalsmith-markdown'),
-    layouts = require('metalsmith-layouts'),
-    collections = require('metalsmith-collections'),
-    permalinks = require('metalsmith-permalinks'),
-    beautify = require('metalsmith-beautify'),
-    feed = require('metalsmith-feed'),
-    moment = require('moment'),
-    metadata = require('metalsmith-metadata'),
-    gulpIgnore = require('gulp-ignore');
-    console.log('... building markup ...');
-
-    var condition = './content/*';
-
-    // TODO : could just source content here
-    return gulp.src(__.build_src + '/**')
+gulp.task('f', function () {
+    const f = filter(['*', '!src/content']);
+    return gulp
+        .src(__.sass_src)
+        .pipe(f)
         .pipe(metalsmith({
             // set Metalsmith's root directory, for example for locating templates, defaults to CWD
             root: __dirname,
@@ -123,6 +122,81 @@ gulp.task('markup', function () {
                     site: 'meta.json',
                     settings: 'settings.json'
                 }),
+                //gulpIgnore.include(condition),
+                markdown(),
+                collections({
+                    articles: {
+                        pattern: './content/articles/*.md',
+                        sortBy: 'date',
+                        reverse: 'True'
+                    }
+                    , news: {
+                        pattern: './content/news/*.md',
+                        sortBy: 'date',
+                        reverse: 'True'
+                    }
+                    , books: {
+                        pattern: './content/books/*.md',
+                        sortBy: 'date',
+                        reverse: 'True'
+                    }
+                }),
+                permalinks({
+                    pattern: ':collections:title'
+                }),
+                feed({collection: 'articles'}),
+                layouts({
+                    engine: 'jade',
+                    moment: moment
+                }),
+                beautify()
+            ],
+            // Initial Metalsmith metadata:
+            metadata: {
+                site_title: 'Sample static site'
+            }
+        }))
+        .resume();
+});
+
+
+gulp.task('markup', function () {
+    console.log('... building markup ...');
+
+    const f = filter(['!src/io', {restore: true}]);
+
+    const jsFilter = filter('**/*.js', {restore: true});
+    const lessFilter = filter('**/*.less', {restore: true});
+
+    //return gulp.src('src/*.js')
+    // filter a subset of the files
+    //.pipe(f)
+    // run them through a plugin
+    //.pipe(uglify())
+    //.pipe(gulp.dest('dist'));
+    //var condition = './content/*';
+
+    // TODO : could just source content here
+    return gulp.src(__.build_src + '/**')
+        //.pipe(f)
+        .pipe(metalsmith({
+            // set Metalsmith's root directory, for example for locating templates, defaults to CWD
+            root: __dirname,
+            // files to exclude from the build
+            ignore: [
+                __.build_src + '/*.tmp',
+                'io/*'
+            ],
+            // read frontmatter, defaults to true
+            frontmatter: true,
+            // Metalsmith plugins to use
+            use: [
+                //lens(),
+                metadata({
+                    site: 'meta.json',
+                    settings: 'settings.json'
+                }),
+                date({ key: 'dateBuilt' }),
                 //gulpIgnore.include(condition),
                 markdown(),
                 collections({

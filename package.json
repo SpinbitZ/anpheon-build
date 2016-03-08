@@ -45,6 +45,7 @@
     "babel-register": "^6.6.5",
     "del": "^2.2.0",
     "ecstatic": "^1.4.0",
+    "glob": "^7.0.3",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-connect": "^3.1.0",
