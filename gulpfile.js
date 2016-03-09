@@ -41,7 +41,7 @@ const
     moment = require('moment'),
     metadata = require('metalsmith-metadata'),
     gulpIgnore = require('gulp-ignore'),
-    lens = require('./lensmith'),
+    lens = require('./modules/lensmith'),
     date = require('metalsmith-build-date');
 
 
@@ -77,11 +77,11 @@ gulp.task('sass:watch', function () {
         });
 });
 
-//gulp.task('watch', function () {
-//    gulp.watch(['./src/**/*.html'], ['html']);
-//    gulp.watch(['./src/**/*.js'], ['js']);
-//    gulp.watch(['./src/**/*.scss'], ['css']);
-//});
+gulp.task('watch', function () {
+    gulp.watch(['./src/**/*.html'], ['html']);
+    gulp.watch(['./src/**/*.js'], ['js']);
+    gulp.watch(['./src/**/*.scss'], ['css']);
+});
 //
 //gulp.task('html', ['templates'], function () {
 //    gulp.src('./dist/html/*.html')
@@ -93,9 +93,9 @@ gulp.task('sass:watch', function () {
 //        .pipe(connect.reload());
 //});
 //
-//gulp.task('css', ['sass'], function () {
-//    gulp.src('./dist/css')
-//        .pipe(connect.reload());
+gulp.task('css', ['sass'], function () {
+    gulp.src('./dist/css')
+        .pipe(connect.reload());
 //});
 
 ////////////////////////////////////////////////////////////////////////////////
