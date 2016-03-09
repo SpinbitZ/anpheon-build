@@ -1,19 +1,7 @@
 var
-
+gulp = require('gulp'),
 opt = {
     title: "'A N P H E O N.org'",
-    __: {
-        build: __dirname,
-        build_src: 'src',
-        pub: './__pub',
-        sass_src: './theme/smas/**/*.scss',
-        css_dest: './__pub/theme',
-        js_src: './src/io',
-        js_dest: '/io',
-        sassdoc_dest: './theme/sassdoc',
-        content_src: './src/**',
-        content_src_minus: '!./src/io/**'
-    },
     sassOptions: {
         errLogToConsole: true,
         outputStyle: 'expanded'
@@ -21,7 +9,6 @@ opt = {
     autoprefixerOptions: {
         browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
     },
-    gulp: require('gulp'),
     sass: require('gulp-sass'),
     sourcemaps: require('gulp-sourcemaps'),
     autoprefixer: require('gulp-autoprefixer'),
@@ -43,9 +30,20 @@ opt = {
     gulpIgnore: require('gulp-ignore'),
     lens: require('./modules/lensmith'),
     date: require('metalsmith-build-date')
+},
+__ = {
+    build: __dirname,
+    build_src: 'src',
+    pub: './__pub',
+    sass_src: './theme/smas/**/*.scss',
+    css_dest: './__pub/theme',
+    js_src: './src/io',
+    js_dest: '/io',
+    sassdoc_dest: './theme/sassdoc',
+    content_src: './src/**',
+    content_src_minus: '!./src/io/**'
 };
 
-var gulp = opt.gulp;
 
 getTask('content');
 getTask('sass');
@@ -75,11 +73,8 @@ gulp.task('prod', ['sassdoc'], function () {
 });
 
 
-
-
-
 function getTask(task) {
-    return require('./gulp-tasks/' + task)(gulp, opt);
+    return require('./gulp-tasks/' + task)(gulp, opt, __);
 }
 
 

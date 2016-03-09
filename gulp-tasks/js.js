@@ -1,4 +1,4 @@
-module.exports = function (gulp, opt) {
+module.exports = function (gulp, opt, __) {
 
     gulp.task('js', function () {
         opt.exec('npm run js', function (err, stdout, stderr) {
@@ -15,7 +15,7 @@ module.exports = function (gulp, opt) {
         return gulp
             // Watch the __sass folder for change,
             // and run `sass` task when something happens
-            .watch(opt.__.js_src, ['js'])
+            .watch(__.js_src, ['js'])
             // When there is a change,
             // log a message in the console
             .on('change', function (event) {

@@ -1,9 +1,9 @@
-module.exports = function (gulp, opt) {
+module.exports = function (gulp, opt, __) {
     gulp.task('content', function () {
-        return gulp.src([opt.__.content_src, opt.__.content_src_minus])
+        return gulp.src([__.content_src, __.content_src_minus])
             .pipe(opt.metalsmith({
                 // set Metalsmith's root directory, for example for locating templates, defaults to CWD
-                root: opt.__.build,
+                root: __.build,
                 // files to exclude from the build
                 ignore: [],
                 // read frontmatter, defaults to true
@@ -48,7 +48,7 @@ module.exports = function (gulp, opt) {
                     site_title: 'Sample static site'
                 }
             }))
-            .pipe(gulp.dest(opt.__.pub));
+            .pipe(gulp.dest(__.pub));
     });
     return null;
 };

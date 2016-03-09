@@ -1,4 +1,4 @@
-module.exports = function (gulp, opt) {
+module.exports = function (gulp, opt, __) {
 
     gulp.task('serve', function () {
         var util = require('util'),
