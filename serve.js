@@ -16,10 +16,10 @@ var app = koa();
 
 var path = __dirname + '/__pub';
 
-console.log("koa server is attempting to serve pages from ... "+path);
+console.log("koa server is attempting to serve pages from ... " + path);
 
 app.use(serve(path));
 
-app.listen('3000');
+app.listen(opt.port);
 
-console.log(opt.title + '... is listening at http://localhost:3000/');
+console.log(opt.title + '... is being served at http://localhost:' + opt.port + '/');

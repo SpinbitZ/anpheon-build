@@ -1,48 +1,55 @@
-const
+var
 
-    opt = {
-        title: "'A N P H E O N.org'"
-    },
-    __ = {
-        build: __dirname,
-        build_src: 'src',
-        pub: './__pub',
-        sass_src: './theme/smas/**/*.scss',
-        css_dest: './__pub/theme',
-        js_src: '',
-        js_dest: '/io',
-        sassdoc_dest: './theme/sassdoc'
-    },
-    sassOptions = {
-        errLogToConsole: true,
-        outputStyle: 'expanded'
-    },
-    autoprefixerOptions = {
-        browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
-    },
+opt = {
+    title: "'A N P H E O N.org'"
+},
+__ = {
+    build: __dirname,
+    build_src: 'src',
+    pub: './__pub',
+    sass_src: './theme/smas/**/*.scss',
+    css_dest: './__pub/theme',
+    js_src: '',
+    js_dest: '/io',
+    sassdoc_dest: './theme/sassdoc'
+},
+sassOptions = {
+    errLogToConsole: true,
+    outputStyle: 'expanded'
+},
+autoprefixerOptions = {
+    browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+},
 
-    gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    sourcemaps = require('gulp-sourcemaps'),
-    autoprefixer = require('gulp-autoprefixer'),
-    sassdoc = require('gulp-sassdoc'),
-    metalsmith = require('gulp-metalsmith'),
-    del = require('del'),
-    filter = require('gulp-filter'),
-    exec = require('child_process').exec,
+gulp = require('gulp'),
+sass = require('gulp-sass'),
+sourcemaps = require('gulp-sourcemaps'),
+autoprefixer = require('gulp-autoprefixer'),
+sassdoc = require('gulp-sassdoc'),
+metalsmith = require('gulp-metalsmith'),
+del = require('del'),
+filter = require('gulp-filter'),
+exec = require('child_process').exec,
 
 //// metalsmith
-    markdown = require('metalsmith-markdown'),
-    layouts = require('metalsmith-layouts'),
-    collections = require('metalsmith-collections'),
-    permalinks = require('metalsmith-permalinks'),
-    beautify = require('metalsmith-beautify'),
-    feed = require('metalsmith-feed'),
-    moment = require('moment'),
-    metadata = require('metalsmith-metadata'),
-    gulpIgnore = require('gulp-ignore'),
-    lens = require('./modules/lensmith'),
-    date = require('metalsmith-build-date');
+markdown = require('metalsmith-markdown'),
+layouts = require('metalsmith-layouts'),
+collections = require('metalsmith-collections'),
+permalinks = require('metalsmith-permalinks'),
+beautify = require('metalsmith-beautify'),
+feed = require('metalsmith-feed'),
+moment = require('moment'),
+metadata = require('metalsmith-metadata'),
+gulpIgnore = require('gulp-ignore'),
+lens = require('./modules/lensmith'),
+date = require('metalsmith-build-date');
+
+
+
+var requireDir = require('require-dir');
+requireDir('./gulp-tasks');
+
+
 
 
 //gulp.task('filter', () => {
@@ -67,8 +74,8 @@ const
 
 gulp.task('sass:watch', function () {
     return gulp
-    // Watch the __sass folder for change,
-    // and run `sass` task when something happens
+        // Watch the __sass folder for change,
+        // and run `sass` task when something happens
         .watch(__.sass_src, ['sass'])
         // When there is a change,
         // log a message in the console
@@ -96,7 +103,7 @@ gulp.task('watch', function () {
 gulp.task('css', ['sass'], function () {
     gulp.src('./dist/css')
         .pipe(connect.reload());
-//});
+});
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -169,8 +176,7 @@ gulp.task('content', function () {
             // set Metalsmith's root directory, for example for locating templates, defaults to CWD
             root: __dirname,
             // files to exclude from the build
-            ignore: [
-            ],
+            ignore: [],
             // read frontmatter, defaults to true
             frontmatter: true,
             // Metalsmith plugins to use
@@ -282,8 +288,8 @@ gulp.task('gulp monitor', function () {
 
 gulp.task('serve', function () {
     var util = require('util'),
-        spawn = require('child_process').spawn,
-        ls = spawn('npm', ['run', 'serve']);
+    spawn = require('child_process').spawn,
+    ls = spawn('npm', ['run', 'serve']);
 
     ls.stdout.on('data', function (data) {
         console.log('stdout: ' + data);
