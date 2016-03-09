@@ -1,11 +1,11 @@
-module.exports = function (gulp, opt, __) {
+module.exports = function (gulp, plugins, __) {
     gulp.task('sass', function () {
         return gulp
             .src(__.sass_src)
-            .pipe(opt.sourcemaps.init())
-            .pipe(opt.sass(opt.sassOptions).on('error', opt.sass.logError))
-            .pipe(opt.sourcemaps.write())
-            .pipe(opt.autoprefixer(opt.autoprefixerOptions))
+            .pipe(plugins.sourcemaps.init())
+            .pipe(plugins.sass(__.sassOptions).on('error', plugins.sass.logError))
+            .pipe(plugins.sourcemaps.write())
+            .pipe(plugins.autoprefixer(__.autoprefixerOptions))
             .pipe(gulp.dest(__.css_dest))
             .resume();
     });
@@ -23,7 +23,7 @@ module.exports = function (gulp, opt, __) {
     gulp.task('sassdoc', function () {
         return gulp
             .src(__.sass_src)
-            .pipe(opt.sassdoc({dest: __.sassdoc_dest}))
+            .pipe(plugins.sassdoc({dest: __.sassdoc_dest}))
             .resume();
     });
     return null;

@@ -16,7 +16,7 @@ var app = koa();
 
 var path = __dirname + '/__pub';
 
-console.log("koa server is attempting to serve pages from ... " + path);
+console.log("koa server:starting to serve pages from ... " + path);
 
 app.use(serve(path));
 

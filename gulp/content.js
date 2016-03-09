@@ -1,7 +1,7 @@
-module.exports = function (gulp, opt, __) {
+module.exports = function (gulp, plugins, __) {
     gulp.task('content', function () {
         return gulp.src([__.content_src, __.content_src_minus])
-            .pipe(opt.metalsmith({
+            .pipe(plugins.metalsmith({
                 // set Metalsmith's root directory, for example for locating templates, defaults to CWD
                 root: __.build,
                 // files to exclude from the build
@@ -10,14 +10,19 @@ module.exports = function (gulp, opt, __) {
                 frontmatter: true,
                 // Metalsmith plugins to use
                 use: [
-                    opt.metadata({
+                    plugins.metadata({
                         site: 'meta.json',
                         settings: 'settings.json'
                     }),
-                    opt.date({key: 'dateBuilt'}),
-                    opt.markdown(),
-                    opt.collections({
-                        articles: {
+                    plugins.date({key: 'dateBuilt'}),
+                    plugins.markdown(),
+                    plugins.collections({
+                        pages: {
+                            pattern: './content/pages/*.md',
+                            sortBy: 'date',
+                            reverse: 'True'
+                        }
+                        , articles: {
                             pattern: './content/articles/*.md',
                             sortBy: 'date',
                             reverse: 'True'
@@ -33,20 +38,21 @@ module.exports = function (gulp, opt, __) {
                             reverse: 'True'
                         }
                     }),
-                    opt.permalinks({
+                    plugins.permalinks({
                         pattern: ':collections:title'
                     }),
-                    opt.feed({collection: 'articles'}),
-                    opt.layouts({
+                    plugins.feed({collection: 'articles'}),
+                    plugins.layouts({
                         engine: 'jade',
-                        moment: opt.moment
+                        moment: plugins.moment
                     }),
-                    opt.beautify()
-                ],
+                    plugins.beautify()
+                ]
+                //,
                 // Initial Metalsmith metadata:
-                metadata: {
-                    site_title: 'Sample static site'
-                }
+                //metadata: {
+                //    site_title: 'Sample static site'
+                //}
             }))
             .pipe(gulp.dest(__.pub));
     });

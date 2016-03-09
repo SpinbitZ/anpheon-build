@@ -1,0 +1,6 @@
+h4 TOP-NAV
+ul
+    each page in collections.pages
+        li= moment(page.date).format('YYYY-MM-DD') + " - "
+        a(href= '/' + page.path + '/')= page.title
+

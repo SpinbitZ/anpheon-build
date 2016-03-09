@@ -1,7 +1,7 @@
-module.exports = function (gulp, opt, __) {
+module.exports = function (gulp, plugins, __) {
 
     gulp.task('js', function () {
-        opt.exec('npm run js', function (err, stdout, stderr) {
+        plugins.exec('npm run js', function (err, stdout, stderr) {
             if (err) {
                 throw err;
             }
