@@ -1,0 +1,54 @@
+{
+  "name": "anpheon",
+  "version": "2.0.0",
+  "description": "ANPHEON.org website",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jade": "^1.9.2",
+    "metalsmith": "^1.3.0",
+    "metalsmith-branch": "0.0.4",
+    "metalsmith-collections": "^0.7.0",
+    "metalsmith-excerpts": "^1.0.0",
+    "metalsmith-feed": "0.0.6",
+    "metalsmith-markdown": "^0.2.1",
+    "metalsmith-permalinks": "^0.4.0",
+    "metalsmith-serve": "0.0.3",
+    "metalsmith-sitemap": "0.0.9",
+    "metalsmith-templates": "^0.6.1",
+    "metalsmith-watch": "^0.2.0",
+    "metalsmith-word-count": "0.0.4",
+    "moment": "^2.9.0"
+  },
+  "devDependencies": {
+    "app-root-path": "^1.0.0",
+    "browser-sync": "^2.7.11",
+    "chalk": "^1.0.0",
+    "colors": "^1.1.2",
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-data": "^1.2.0",
+    "gulp-json-editor": "^2.2.1",
+    "gulp-version-tag": "0.0.10",
+    "gulp-vinyl-zip": "^1.0.7",
+    "immutable": "^3.7.3",
+    "lodash": "^3.9.3",
+    "metalsmith-include": "0.0.2",
+    "metalsmith-sass": "^1.2.1",
+    "minimist": "^1.1.1",
+    "node-version-bump": "0.0.4",
+    "path": "^0.11.14",
+    "procstreams": "^0.3.0",
+    "shell": "^0.3.2",
+    "shelljs": "^0.5.1",
+    "version": "^0.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpinbitZ/anpheon.org.git"
+  }
+}

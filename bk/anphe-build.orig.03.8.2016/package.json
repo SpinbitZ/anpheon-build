@@ -1,0 +1,31 @@
+{
+  "name": "anpheon",
+  "version": "0.0.23-4",
+  "description": "ANPHEON.org website",
+  "main": "Anpheon.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "squat": "echo \"little doggy\" && a build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.9.0"
+  },
+  "devDependencies": {
+    "async": "^1.3.0",
+    "commander": "^2.8.1",
+    "gulp-metalsmith": "0.0.3",
+    "jsonfile": "^2.2.1",
+    "lodash": "^3.9.3",
+    "procstreams": "^0.3.0",
+    "ps-tree": "^1.0.0",
+    "q": "^1.4.1",
+    "shelljs": "^0.5.1",
+    "version": "^0.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpinbitZ/anpheon.org.git"
+  }
+}
