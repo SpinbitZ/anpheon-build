@@ -1,35 +1,40 @@
 var
-__ = {
-    title: "'A N P H E O N.org'",
-    sassOptions: {
-        errLogToConsole: true,
-        outputStyle: 'expanded'
+    __ = {
+        title: "'A N P H E O N.org'",
+        sassOptions: {
+            errLogToConsole: true,
+            outputStyle: 'expanded'
+        },
+        autoprefixerOptions: {
+            browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+        },
+        build: __dirname,
+        build_src: 'src',
+        pub: './__pub',
+        sass_src: './theme/smas/**/*.scss',
+        css_dest: './__pub/theme',
+        js_src: './src/io',
+        js_dest: '/io',
+        sassdoc_dest: './theme/sassdoc',
+        content_src: './src/**',
+        content_src_minus: '!./src/io/**'
     },
-    autoprefixerOptions: {
-        browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
-    },
-    build: __dirname,
-    build_src: 'src',
-    pub: './__pub',
-    sass_src: './theme/smas/**/*.scss',
-    css_dest: './__pub/theme',
-    js_src: './src/io',
-    js_dest: '/io',
-    sassdoc_dest: './theme/sassdoc',
-    content_src: './src/**',
-    content_src_minus: '!./src/io/**'
-},
-gulp = require('gulp'),
-plugins = require('./gulp/plugins');
+    gulp = require('gulp'),
+    plugins = require('./gulp/plugins');
+
+gulp.task('default', function (err) {
+    "use strict";
+    console.log("yo.....!");
+});
 
 getTask('content');
 getTask('sass');
 getTask('js');
 getTask('serve');
-
-//TODO
-gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]);
-
+//
+////TODO
+//gulp.task('default', ['sass', 'watch' /*, possible other tasks... */]);
+//
 gulp.task('build', ['content', 'sass', 'js']);
 
 gulp.task('dev', ['build', 'sass:watch', 'serve']);

@@ -70,11 +70,13 @@ jspm_packages
 __pub
 *.idea
 
-npm-debug.log*
+npm-debug.log.**
 
 js
 
 
 *.iml
+
+bk
 
 anpheon.org
