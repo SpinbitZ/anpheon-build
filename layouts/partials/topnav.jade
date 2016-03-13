@@ -1,7 +1,7 @@
-div(id="topmenu")
-    h4 TOP-NAV
-    ul
-        each page in collections.pages
-            li= moment(page.date).format('YYYY-MM-DD') + " - "
+div(id="topnav-hero")
+    h4 HERO GOES HERE
+ul(id="topnav")
+    each page in collections.pages
+        li= ""
             a(href= '/' + page.path + '/')= page.title
 

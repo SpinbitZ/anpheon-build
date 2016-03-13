@@ -46,6 +46,7 @@ nav {
   font-size: 1em;
   font: inherit;
   vertical-align: baseline;
+  text-decoration: none;
 }
 
 body,
@@ -148,12 +149,12 @@ hr {
 
 a:link {
   color: #333;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:visited {
   color: #555;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:active {

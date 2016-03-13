@@ -1,6 +1,6 @@
 module.exports = function (gulp, plugins, __) {
     gulp.task('content', function () {
-        return gulp.src([__.content_src, __.content_src_minus])
+        return gulp.src([__.src, __.src_not_js])
             .pipe(plugins.metalsmith({
                 // set Metalsmith's root directory, for example for locating templates, defaults to CWD
                 root: __.build,
@@ -58,3 +58,4 @@ module.exports = function (gulp, plugins, __) {
     });
     return null;
 };
+

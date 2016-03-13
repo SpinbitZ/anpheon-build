@@ -11,11 +11,16 @@ module.exports = function (gulp, plugins, __) {
         });
     });
 
+    //Watch task
+    //gulp.task('js:watch',function() {
+    //    gulp.watch(__.js_src,['js']);
+    //});
+
     gulp.task('js:watch', function () {
         return gulp
             // Watch the __sass folder for change,
             // and run `sass` task when something happens
-            .watch(__.js_src, ['js'])
+            .watch(__.js_src+"/**.js", ['js'])
             // When there is a change,
             // log a message in the console
             .on('change', function (event) {
@@ -23,11 +28,5 @@ module.exports = function (gulp, plugins, __) {
             });
     });
 
-    gulp.task('reload-js', function () {
-        gulp.src('./src/**/*.js')
-            .pipe(connect.reload());
-    });
-
-    return null;
 };
 
