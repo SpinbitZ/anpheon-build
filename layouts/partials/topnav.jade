@@ -1,7 +1,79 @@
-div(id="topnav-hero")
-    h4 HERO GOES HERE
-ul(id="topnav")
+ul(id="topnav" data-length=collections.pages.length)
+    - var i=0
+    - var l=collections.pages
     each page in collections.pages
+        - i=i+1
         li= ""
-            a(href= '/' + page.path + '/')= page.title
+            a(href= '/' + page.path + '/' data-item-num=i)= page.title
 
+
+        // 12172A 740923 D11C25 FABA4E FEDA8E
+
+//
+//        12172A
+//    HEX
+//18,23,42
+//RGB
+//0
+//LOVES
+//22
+//VIEWS
+//0
+//FAVORITES
+//0
+//COMMENTS
+//Roses are redby misat*
+//740923
+//HEX
+//116,9,35
+//RGB
+//0
+//LOVES
+//19
+//VIEWS
+//0
+//FAVORITES
+//0
+//COMMENTS
+//salmon locoby jjolimie
+//D11C25
+//HEX
+//209,28,37
+//RGB
+//0
+//LOVES
+//4
+//VIEWS
+//0
+//FAVORITES
+//0
+//COMMENTS
+//Laser Yellowby Naomimimi
+//FABA4E
+
+//HEX
+//250,186,78
+//RGB
+//0
+//LOVES
+//12
+//VIEWS
+//0
+//FAVORITES
+//0
+//COMMENTS
+//mildew yellowby chiron8
+//FEDA8E
+
+//HEX
+//254,218,142
+//RGB
+//0
+//LOVES
+//5
+//VIEWS
+//0
+//FAVORITES
+//0
+//COMMENTS
+//
