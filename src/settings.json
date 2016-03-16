@@ -1,4 +1,4 @@
 {
   "theme": "/theme/app.css",
-  "script_entry":"/io/core.min.js"
+  "script_entry":"/js/core.min.js"
 }

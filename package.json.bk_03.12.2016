@@ -85,7 +85,7 @@
   },
   "jspm": {
     "directories": {
-      "baseURL": "src/io"
+      "baseURL": "src/js"
     },
     "configFile": "jspm_config.js",
     "dependencies": {

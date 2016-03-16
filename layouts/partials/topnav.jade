@@ -1,3 +1,7 @@
+<div id="topnav-container" style="width:800px; margin:0 auto;">
+div(id="bmi-calc")
+div(id="checkbox")
+div(id="checkbox2")
 ul(id="topnav" data-length=collections.pages.length)
     - var i=0
     - var l=collections.pages
@@ -5,3 +9,5 @@ ul(id="topnav" data-length=collections.pages.length)
         - i=i+1
         li= ""
             a(href= '/' + page.path + '/' data-item-num=i)= page.title
+</div>
+div(id="bmi-calc2")

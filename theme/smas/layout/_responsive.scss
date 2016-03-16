@@ -1,0 +1,77 @@
+$breakpoint-tablet:     767px;
+$breakpoint-phone:      480px;
+$page-max-width:        1200px;
+
+
+/*
+@mixin sizes-mobile ($var-size-delta:0) {
+  @include media-phone() {
+    @include sizes($responsive-size-delta + $var-size-delta);
+  }
+}
+*/
+
+@mixin media-phone() {
+  @media only screen and (max-width: $breakpoint-phone) {
+    @content;
+  }
+}
+
+@mixin desktop-only() {
+  @media (min-width:$breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin phone-only() {
+  @media (max-width:$breakpoint-phone) {
+    @content;
+  }
+}
+
+@mixin exclude-phone() {
+  @media (min-width:$breakpoint-phone) {
+    @content;
+  }
+}
+
+@mixin exclude-desktop() {
+  @media (max-width:$breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin below-max-page-width() {
+  @media (max-width:$page-max-width) {
+    @content;
+  }
+}
+
+@media (max-width:$breakpoint-phone) {
+  .phone-width-full {
+    width:100%;
+  }
+}
+
+@media only screen and (min-width: $breakpoint-phone) {
+  .phone-only {
+    display:none!important;
+  }
+}
+@media only screen and (min-width: $breakpoint-tablet + 1) {
+  .exclude-desktop {
+    display:none!important;
+  }
+}
+
+@media only screen and (max-width: $breakpoint-phone) {
+  .tablet-only {
+    display:none;
+  }
+}
+
+@media only screen and (min-width:$breakpoint-tablet + 1) {
+  .tablet-only {
+    display:none;
+  }
+}

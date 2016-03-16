@@ -1,52 +1,81 @@
-// 12172A 740923 D11C25 FABA4E FEDA8E
-// Variable list for all social button colors to be iterated over.
-//
-//$color1: #12172A !default;
-//$color2: #740923 !default;
-//$color3: #D11C25 !default;
-//$color4: #FABA4E !default;
-//$color5: #FEDA8E !default;
-//
-//$social-list: (
-//        color1 $color1,
-//        color2 $color2,
-//        color3 $color3,
-//        color4 $color4,
-//        color5 $color5
-//);
+
+#topnav-container{
+  width:800px;
+  margin:0 auto;
+}
 
 #topnav {
   list-style-type: none;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+
   li {
-    display: inline-block;
-    box-sizing: border-box;
+    //box-sizing: border-box;
+    float: left;
     width: 20%;
     height: 30px;
-    padding: 0;
-    margin: 0;
-    //background: red;
+    line-height: 13px;
+    list-style: none;
+    margin: 0 !important;
+    padding: 0 !important;
     a {
-      background-color: #180b39;
-      color: #6c54bf;
-      display: inherit;
       position: relative;
-      box-sizing: border-box;
-      padding: 0;
-      margin: 0;
       width: 100%;
       height: 100%;
-      outline: 1px solid #3916a1;
-      //opacity: 0.2;
-      &:hover {
-        background-color: #4a22ae;
-        color: black;
-        //opacity: 1;
+      line-height: 1.3;
+      background-color: #180b39;
+      color: #311774;
+      outline: #2E119C 1px solid;
+      box-sizing: border-box;
+      display: block;
+      background-image: none !important;
+      font-size: 21px;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      text-transform: uppercase;
 
+      &:hover {
+        background-color: #1d0d4c;
+        color: #3618a2;
+        //opacity: 1;
+      }
+
+      &:focus {
+        outline: none;
       }
     }
+    //}
+    //li {
+    //  display: inline-block;
+    //  box-sizing: border-box;
+    //  width: 20%;
+    //  height: 30px;
+    //  padding: 0;
+    //  margin: 0;
+    //  //background: red;
+    //  a {
+    //    background-color: #180b39;
+    //    color: #6c54bf;
+    //    display: inherit;
+    //    position: relative;
+    //    box-sizing: border-box;
+    //    padding: 0;
+    //    margin: 0;
+    //    width: 100%;
+    //    height: 100%;
+    //    outline: 1px solid #3916a1;
+    //    //opacity: 0.2;
+    //    &:hover {
+    //      background-color: #4a22ae;
+    //      color: black;
+    //      //opacity: 1;
+    //
+    //    }
+    //  }
   }
   //
   //$colors: #1d2544, #741d3f, #D11C25, #FABA4E, #FEDA8E;

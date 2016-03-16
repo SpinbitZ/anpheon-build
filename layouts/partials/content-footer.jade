@@ -1,0 +1,6 @@
+p(style='color: #666;')= moment(date).format('MMMM Do YYYY')
+if previous
+    p(style='text-align: right; float: right;'): a(href="/#{previous.path}/") #{previous.title + ' >>'}
+if next
+    p(style='text-align: left; float: left;'): a(href="/#{next.path}/") #{'<< ' + next.title}
+hr

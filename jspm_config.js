@@ -23,6 +23,7 @@ System.config({
     "react": "npm:react@0.14.7",
     "react-dom": "npm:react-dom@0.14.7",
     "rx": "npm:rx@4.1.0",
+    "rxjs": "npm:rxjs@5.0.0-beta.2",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -116,6 +117,10 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:rx@4.1.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:rxjs@5.0.0-beta.2": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:sentence-case@1.1.3": {
