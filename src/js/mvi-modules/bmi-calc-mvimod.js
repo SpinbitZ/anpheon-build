@@ -3,7 +3,7 @@ import * as Rx from 'rx';
 import {div, input, label, h2, makeDOMDriver} from '@cycle/dom';
 const O = Rx.Observable;
 
-import mod from './mvi-modder';
+import mvi from './mvi-modder';
 
 
 export default function bmiCalc(opt) {
@@ -42,28 +42,9 @@ export default function bmiCalc(opt) {
                 ])
             );
         };
-
-        mod({model: model, view: view, intent: intent, el: opt.el});
-
-        //
-        //function main(sources) {
-        //    const {changeWeight$, changeHeight$} = intent(sources.DOM);
-        //    const state$ = model(changeWeight$, changeHeight$);
-        //    const vtree$ = view(state$);
-        //
-        //    //view(model(intent(sources.DOM)))
-        //
-        //    return {
-        //        DOM: vtree$
-        //    };
-        //}
-        //
-        //const drivers = {
-        //    DOM: makeDOMDriver(opt.el)
-        //};
-        //Cycle.run(main, drivers);
+///// BDOF-JKJL-MMM--->
+        mvi({model, view, intent, el: opt.el});
 
     };
-
 
 }

@@ -11,7 +11,9 @@ const O = Rx.Observable; //!!
  * @returns {Function}
  */
 
-export default function mviMod(opt) {
+export default function scroller(opt) {
+
+    console.log("scroller is ... ", opt);
 
     return function(){
 
@@ -19,26 +21,40 @@ export default function mviMod(opt) {
 
         //// ->/////// INTENT-ACTION - Takes the DOM driver SOURCE interface to the outside intent and returns "input" mapped as value
         function intent(DOMSource) {
-            return DOMSource.select('.prop')
-                .events('input')
-                .map(ev => ev.target.value);
+            return DOMSource.select(opt.el)
+                .events('scroll')
+                .map(e => {
+                    console.log("e is ... ", e);
+                    return e.target.scrollTop;
+                });
         }
 
         ///// MODEL-STATE - (no side effects)
-        function model(intent$) {
-            return O.combineLatest(
-                intent$.startWith(70),
-                (value) => {
-                    console.log("value is ... ", value);
-                    return {value}; // {value:37}
-                }
+        function model(actions) {
+
+            console.log("actions is ... ", actions);
+            //let tableHeight$ = O.just(500);
+            //let rowHeight$ = O.just(30);
+            //let columns$ = O.just(['ID', 'ID * 10', 'Random Number']);
+            //let rowCount$ = O.just(10000);
+            let scrollTop$ = actions.startWith(0);
+            //let visibleIndices$ = makeVisibleIndices$(
+            //    tableHeight$, rowHeight$, rowCount$, scrollTop$
+            //);
+            let state$ = O.combineLatest(
+                scrollTop$,
+                (scrolltop) =>
+                    {
+                        console.log("model: scrolltop is ... ", scrolltop);
+                    }
             );
+            return state$;
         }
 
         ///// VIEW-TREE - render state - (still no side-effects) ---> //// vTree$
         function view(state$) {
+            console.log("view: state$ is ... ", state$);
             return state$.map(state =>
-
                 div({id:opt.el},[
                     div([
                         label('mvi-mod:: Property: ' + state.value + 'amounts'),
@@ -58,14 +74,15 @@ export default function mviMod(opt) {
             };
         }
 
-         /////// /////// SIDE-EFFECTS  --- in and out ... through drivers
+        /////// /////// SIDE-EFFECTS  --- in and out ... through drivers
         const DRIVERS = {
             //// SINKS --->
-            DOM: makeDOMDriver(opt.el) // eg. "#main"
+            DOM: makeDOMDriver('body') // eg. "#main"
         };
 
         //// one-function api
         Cycle.run(MAIN, DRIVERS);
+
 
     };
 
