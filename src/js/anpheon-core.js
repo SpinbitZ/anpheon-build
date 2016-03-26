@@ -14,9 +14,8 @@
 
 
 import scroller from './mvi-modules/scroller-mvi.js';
-scroller({el:'#topnav-hero'})();
+scroller({el:'topnav-hero'})();
 console.log("scroller is ... ", scroller);
-
 
 
 //mviMod({el:'#topnav-hero'})();
