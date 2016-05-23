@@ -1,10 +1,10 @@
 //TODO:: inject meta.json for menu build
 
 
-//import btm from './mvi-modules/menubutton.js';
-//import mviMod from './mvi-modules/mvi-mod.js';
-//import bmiMod from './mvi-modules/bmi-calc-mvimod.js';
-//import checkbox from './mvi-modules/checkbox.js';
+//import btm from './cycle-mvi/menubutton.js';
+//import mviMod from './cycle-mvi/mvi-mod.js';
+//import bmiMod from './cycle-mvi/bmi-calc-mvimod.js';
+//import checkbox from './cycle-mvi/checkbox.js';
 
 
 
@@ -13,7 +13,7 @@
 
 
 
-import scroller from './mvi-modules/scroller-mvi.js';
+import scroller from './cycle-mvi/scroller-mvi.js';
 scroller({el:'topnav-hero'})();
 console.log("scroller is ... ", scroller);
 
